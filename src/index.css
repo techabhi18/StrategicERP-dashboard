@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@layer base {
+    body:has(.bg-lightblue) {
+        @apply bg-[#d9f1ff];
+    }
+
+    body:has(.hide-submenus) .submenus {
+        @apply !hidden;
+    }
+
+}
+
+@layer components {}
+
+@layer utilities {
+    .bg-primary {
+        @apply bg-[#1171ef];
+    }
+
+    .text-primary {
+        @apply text-[#1171ef];
+    }
+
+    .submenu-active {
+        @apply bg-blue-500 text-white px-5 py-0.5 font-semibold transform -skew-x-36 rounded-sm shadow-lg;
+    }
+
+    .submenu-active .submenu-text {
+        @apply inline-block transform skew-x-36;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        @apply hidden;
+    }
+}
