@@ -1,30 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { FiMenu } from "react-icons/fi";
-import { IoMdMail } from "react-icons/io";
-import { FaMicrophone, FaCalculator } from "react-icons/fa";
-import { MdOutlineContentCopy } from "react-icons/md";
-import { FaEarthAmericas, FaListUl, FaCreditCard } from "react-icons/fa6";
+import { IoMenuOutline } from "react-icons/io5";
+
+import { useLocale } from "../../../i18n";
+import Icon from "../../common/Icon";
+
+import DashboardIcon from "../../icons/DashboardIcon";
+import PendingIcon from "../../icons/PendingIcon";
+import TodoIcon from "../../icons/TodoIcon";
+import CalenderIcon from "../../icons/CalenderIcon";
+import ProfileIcon from "../../icons/ProfileIcon";
+import EFilesIcon from "../../icons/E-FilesIcon";
+import SharedFilesIcon from "../../icons/SharedFilesIcon";
+import ChanakyaAiIcon from "../../icons/ChanakyaAIIcon";
 
 const subMenus = [
-    { name: "Modules", link: "/" },
-    { name: "Dashboard", link: "/dashboard" },
-    { name: "Home", link: "/home" },
-    { name: "Pending", link: "/pending" },
-    { name: "Todo Tasks", link: "/todo-tasks" },
-    { name: "Scheduler", link: "/scheduler" },
-    { name: "Report Tool", link: "/report-tool" },
-    { name: "Profile", link: "/profile" },
-    { name: "e-Files", link: "/e-files" },
-    { name: "Shared e-Files", link: "/shared-e-files" },
-    { name: "Updates", link: "/updates" },
-    { name: "Chanakya", link: "/chanakya" },
-    { name: "ESS", link: "/ess" }
+    { name: "Dashboard", link: "/", Icon: DashboardIcon },
+    { name: "Pending", link: "/pending", Icon: PendingIcon },
+    { name: "To Do", link: "/todo", Icon: TodoIcon },
+    { name: "Calender", link: "/calender", Icon: CalenderIcon },
+    { name: "Profile", link: "/profile", Icon: ProfileIcon },
+    { name: "e-Files", link: "/e-files", Icon: EFilesIcon },
+    { name: "Shared Files", link: "/shared-files", Icon: SharedFilesIcon },
+    { name: "ChanakyaAI", link: "/chanakya-ai", Icon: ChanakyaAiIcon },
 ];
+
+const MenuIcon = ({ IconComponent, isActive }) => {
+    return <IconComponent color={isActive ? "#183EC2" : "#808080"} />;
+};
+
+const MenuItem = ({ name, link, IconComponent, isActive, onClick }) => {
+    return (
+        <div className={`whitespace-nowrap px-3 py-2 text-sm inline-block ${isActive ? "bg-[#f5f6fb] text-[#183EC2] border-b-[3px] border-solid border-[#183EC2]" : "text-[#808080]"}`}>
+            <NavLink to={link} onClick={onClick} className={`submenu-text flex gap-1.5 items-center`}>
+                <MenuIcon IconComponent={IconComponent} isActive={isActive} />
+                {name}
+            </NavLink>
+        </div>
+    );
+};
 
 const Header = () => {
     const location = useLocation();
     const [activeMenu, setActiveMenu] = useState("/");
+
+    const { locale, switchLanguage } = useLocale();
 
     useEffect(() => {
         setActiveMenu(location.pathname);
@@ -32,36 +52,51 @@ const Header = () => {
 
     return (
         <div className="sticky top-0 z-99 shadow-sm">
-            <div className="bg-primary py-2 px-4 flex items-center justify-between gap-4">
+            <div className="bg-[#f6f8fc] py-2 px-4 flex items-center justify-between gap-4 h-[62px]">
                 <div className="flex items-center gap-4">
                     <NavLink to="/">
-                        <img src="/images/StrategicERP-white-logo.png" alt="StrategicERP" className="w-full max-w-32" />
+                        <img src="/Header/StrategicERP.svg" alt="StrategicERP" className="w-full max-w-32" />
                     </NavLink>
-                    <FiMenu className="text-primary bg-white rounded-full p-[3px] text-3xl cursor-pointer" />
                 </div>
-                <div className="md:flex hidden items-center gap-4">
-                    <IoMdMail className="text-white text-[26px] cursor-pointer" />
-                    <FaCreditCard className="text-white text-2xl cursor-pointer" />
-                    <FaMicrophone className="text-white text-2xl cursor-pointer" />
-                    <FaCalculator className="text-white text-2xl cursor-pointer" />
-                    <MdOutlineContentCopy className="text-white text-2xl cursor-pointer" />
-                    <FaEarthAmericas className="text-white text-2xl cursor-pointer" />
-                    <FaListUl className="text-white text-2xl cursor-pointer" />
+
+                <div>
+                    <label htmlFor="search"></label>
+                    <input type="search" name="search" id="search" placeholder="Search..." className="rounded-lg py-1 px-2 border border-solid border-[#c8d2e6] text-sm min-w-72 w-full outline-none" />
                 </div>
-            </div>
-            <div className="submenus hide-scrollbar w-full flex xl:justify-between justify-start overflow-auto gap-x-7 gap-y-4 items-center bg-white px-8 py-2">
-                {subMenus.map((menu, i) => (
-                    <div
-                        key={i}
-                        className={`whitespace-nowrap text-sm inline-block ${activeMenu === menu.link ? "submenu-active text-blue-600 font-bold" : "text-primary font-semibold"
-                            }`}
-                    >
-                        <NavLink to={menu.link} onClick={() => setActiveMenu(menu.link)} className="submenu-text">
-                            {menu.name}
-                        </NavLink>
+
+                <div className="md:flex hidden items-center gap-2.5">
+                    <Icon src="/Header/Calculator_Icon.svg" alt="Calculator" />
+                    <Icon src="/Header/New_Window_Icon.svg" alt="Open a new window" />
+                    <Icon src="/Header/Video_Icon.svg" alt="Video" />
+                    <Icon src="/Header/Maximum_Icon.svg" alt="Full Screen" />
+
+                    <select className="bg-white border border-solid border-[#c8d2e6] text-primary p-[3px] rounded text-sm" value={locale} onChange={(e) => switchLanguage(e.target.value)}>
+                        <option value="en">English</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+
+                    <div className="flex items-center gap-2 bg-white border border-solid border-[#c8d2e6] rounded-md p-1">
+                        <img src="/Header/StrategicERP_Version.gif" alt="StrategicERP Version" className="w-[52px]" />
                     </div>
-                ))}
+                    <IoMenuOutline className="text-3xl bg-white border border-solid border-[#c8d2e6] rounded-md p-0.5 text-[#2144B4]" />
+                </div>
             </div>
+
+            {location?.pathname == "/" ?
+                <div className="submenus hide-scrollbar w-full flex flex-wrap justify-start gap-y-2 items-center bg-white px-2">
+                    {subMenus.map(({ name, link, Icon: IconComponent }) => (
+                        <MenuItem
+                            key={link}
+                            name={name}
+                            link={link}
+                            IconComponent={IconComponent}
+                            isActive={activeMenu === link}
+                            onClick={() => setActiveMenu(link)}
+                        />
+                    ))}
+                    <p className="text-sm text-right block ml-auto">Good Evening!!! ERP Admin</p>
+                </div>
+                : null}
         </div>
     );
 };

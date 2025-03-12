@@ -13,8 +13,8 @@ const CustomInput = ({
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="w-full flex justify-between items-center">
-        <h5 className={`text-sm text-black ${className?.includes("input-full-width") ? 'w-[25%]' : 'w-[51.2%]'}`}>
+      <div className="w-full">
+        <h5 className={`text-sm text-black w-full mb-1`}>
           {label}
           {required && <span className="text-red-700">*</span>}
         </h5>
@@ -23,7 +23,7 @@ const CustomInput = ({
           {...props}
           placeholder={placeholder}
           invalid={isInvalid ? "true" : "false"}
-          className={`${className?.includes("input-full-width") ? 'w-[75%]' : 'w-[48.8%]'} bg-blue-100 shadow-inner rounded-md focus:outline-none px-2 py-1 text-sm`}
+          className={`w-full bg-[#f9fafe] border border-[#BDC2D0] rounded-md focus:outline-none px-2 py-1 text-sm`}
         />
       </div>
       <div>

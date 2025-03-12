@@ -1,15 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer base {
-    body:has(.bg-lightblue) {
-        @apply bg-[#d9f1ff];
-    }
-
-    body:has(.hide-submenus) .submenus {
-        @apply !hidden;
-    }
-
-}
+@layer base {}
 
 @layer components {}
 
@@ -22,15 +15,19 @@
         @apply text-[#1171ef];
     }
 
-    .submenu-active {
-        @apply bg-blue-500 text-white px-5 py-0.5 font-semibold transform -skew-x-36 rounded-sm shadow-lg;
-    }
-
-    .submenu-active .submenu-text {
-        @apply inline-block transform skew-x-36;
-    }
-
     .hide-scrollbar::-webkit-scrollbar {
         @apply hidden;
+    }
+
+    .self-training-card-icon {
+        background-image: linear-gradient(to right, #b720fe 0, #493fe4 50%, #204efe 100%);
+    }
+
+    .sidebar-menu-item {
+        @apply block p-1 pl-2 my-1 rounded-md text-sm text-[#0d0c22] cursor-pointer hover:bg-[#3c68dd] hover:text-white;
+    }
+
+    .btn-hover {
+        @apply hover:bg-[#3c68dd] hover:text-white duration-200;
     }
 }

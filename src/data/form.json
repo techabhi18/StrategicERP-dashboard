@@ -1,0 +1,790 @@
+{
+  "company-master": {
+    "handle": "company-master",
+    "title": "Company Master",
+    "api": {
+      "url": "/api/company/save",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "fields": [
+      {
+        "name": "CompanyName",
+        "label": "Name of Company",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Company Name is required"
+      },
+      {
+        "name": "LegalEntityName",
+        "label": "Legal Entity Name",
+        "type": "text"
+      },
+      {
+        "name": "CompanyCode",
+        "label": "Company Code",
+        "type": "number",
+        "required": true,
+        "validationMessage": "Company Code is required and should be a number"
+      },
+      {
+        "name": "City",
+        "label": "City",
+        "type": "text",
+        "required": true,
+        "validationMessage": "City is required"
+      },
+      {
+        "name": "State",
+        "label": "State",
+        "type": "text",
+        "required": true,
+        "validationMessage": "State is required"
+      },
+      {
+        "name": "Country",
+        "label": "Country",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Country is required"
+      },
+      {
+        "name": "Pincode",
+        "label": "Pincode",
+        "type": "number",
+        "required": true,
+        "validationMessage": "Pincode is required"
+      },
+      {
+        "name": "MobileNo",
+        "label": "Mobile No",
+        "type": "number"
+      },
+      {
+        "name": "PhoneNo",
+        "label": "Phone No",
+        "type": "number"
+      },
+      {
+        "name": "Email",
+        "label": "Email",
+        "type": "email"
+      },
+      {
+        "name": "RegisteredAddress",
+        "label": "Registered Address",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Registered Address is required"
+      },
+      {
+        "name": "CommunicationAddress",
+        "label": "Communication Address",
+        "type": "textarea",
+        "required": true,
+        "validationMessage": "Communication Address is required"
+      },
+      {
+        "name": "MSME",
+        "label": "MSME",
+        "type": "text"
+      },
+      {
+        "name": "FinancialYear",
+        "label": "Financial Year",
+        "type": "number"
+      },
+      {
+        "name": "Timezone",
+        "label": "Timezone",
+        "type": "text"
+      },
+      {
+        "name": "BooksBeginningFrom",
+        "label": "Books Beginning From",
+        "type": "date"
+      },
+      {
+        "name": "AmountFormat",
+        "label": "Amount Format",
+        "type": "text"
+      },
+      {
+        "name": "ERPGoLiveDate",
+        "label": "ERP Go-Live Date",
+        "type": "date",
+        "required": true,
+        "validationMessage": "ERP Go-Live Date is required"
+      },
+      {
+        "name": "VendorMainLedger",
+        "label": "Vendor Main Ledger",
+        "type": "text"
+      },
+      {
+        "name": "EmployeeMainLedger",
+        "label": "Employee Main Ledger",
+        "type": "text"
+      },
+      {
+        "name": "ClientMainLedger",
+        "label": "Client Main Ledger",
+        "type": "text"
+      },
+      {
+        "name": "PAN",
+        "label": "PAN / IT No",
+        "type": "text"
+      },
+      {
+        "name": "GSTType",
+        "label": "GST Type",
+        "type": "text"
+      },
+      {
+        "name": "TAN",
+        "label": "TAN No.",
+        "type": "text"
+      },
+      {
+        "name": "CessNo",
+        "label": "Cess No.",
+        "type": "text"
+      },
+      {
+        "name": "CIN",
+        "label": "CIN No.",
+        "type": "text"
+      },
+      {
+        "name": "CompanyStatus",
+        "label": "Company Status",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Company Status is required"
+      },
+      {
+        "name": "TotalShares",
+        "label": "Total No. of Shares",
+        "type": "number"
+      },
+      {
+        "name": "SharePrice",
+        "label": "Share Price",
+        "type": "number"
+      },
+      {
+        "name": "BalanceSheetStock",
+        "label": "Show Closing Stock in Balance Sheet",
+        "type": "select",
+        "options": ["Yes", "No"]
+      },
+      {
+        "name": "CompanyAddress",
+        "label": "Company Address",
+        "type": "text"
+      },
+      {
+        "name": "Remarks",
+        "label": "Remarks",
+        "type": "textarea"
+      },
+      {
+        "name": "MinGoLiveDate",
+        "label": "Min Go Live Date",
+        "type": "date"
+      },
+      {
+        "name": "Status",
+        "label": "Status",
+        "type": "text",
+        "default": "Auto"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Save",
+        "type": "submit",
+        "label": "Save",
+        "className": ""
+      },
+      {
+        "name": "Search",
+        "type": "button",
+        "label": "Search",
+        "className": ""
+      },
+      {
+        "name": "Print",
+        "type": "button",
+        "label": "Print(1)",
+        "className": ""
+      }
+    ],
+    "search": {
+      "enabled": true,
+      "placeholder": "Search by Company Name",
+      "field": "CompanyName"
+    },
+    "table": {
+      "columns": [
+        { "name": "Sr", "selector": "id", "sortable": true },
+        {
+          "name": "Name of Company",
+          "selector": "CompanyName",
+          "sortable": true
+        },
+        {
+          "name": "ERP Go-Live Date",
+          "selector": "ERPGoLiveDate",
+          "sortable": true
+        },
+        {
+          "name": "Books Beginning From",
+          "selector": "BooksBeginningFrom",
+          "sortable": true
+        },
+        {
+          "name": "Min Go Live Date",
+          "selector": "MinGoLiveDate",
+          "sortable": true
+        }
+      ],
+      "data": [
+        {
+          "id": 1,
+          "CompanyName": "HoABL PVT LTD",
+          "ERPGoLiveDate": "01/04/2024",
+          "BooksBeginningFrom": "01/04/2012",
+          "MinGoLiveDate": "01/01/2000"
+        },
+        {
+          "id": 2,
+          "CompanyName": "Pritam Test",
+          "ERPGoLiveDate": "01/09/2015",
+          "BooksBeginningFrom": "01/04/2012",
+          "MinGoLiveDate": "01/01/2000"
+        },
+        {
+          "id": 3,
+          "CompanyName": "Prathmesh Test",
+          "ERPGoLiveDate": "14/08/2024",
+          "BooksBeginningFrom": "14/08/2024",
+          "MinGoLiveDate": "01/01/2000"
+        },
+        {
+          "id": 4,
+          "CompanyName": "New Company",
+          "ERPGoLiveDate": "09/08/2024",
+          "BooksBeginningFrom": "09/08/2024",
+          "MinGoLiveDate": "01/01/2000"
+        }
+      ]
+    }
+  },
+  "project-master": {
+    "handle": "project-master",
+    "title": "Project Master",
+    "api": {
+      "url": "/api/project/save",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "fields": [
+      {
+        "name": "CompanyName",
+        "label": "Name of Company",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Company Name is required"
+      },
+      {
+        "name": "CompanyCode",
+        "label": "Company Code",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Company Code is required"
+      },
+      {
+        "name": "ProjectType",
+        "label": "Project Type",
+        "type": "select",
+        "options": ["Type A", "Type B", "Type C"],
+        "required": true,
+        "validationMessage": "Project Type is required"
+      },
+      {
+        "name": "ProjectName",
+        "label": "Project Name",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Project Name is required"
+      },
+      {
+        "name": "ProjectCode",
+        "label": "Project Code",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Project Code is required"
+      },
+      {
+        "name": "BudgetApplicable",
+        "label": "Budget Applicable",
+        "type": "select",
+        "options": ["Yes", "No"]
+      },
+      {
+        "name": "ProjectStartDate",
+        "label": "Project Start Date",
+        "type": "date",
+        "required": true,
+        "validationMessage": "Project Start Date is required"
+      },
+      {
+        "name": "ProjectManager",
+        "label": "Project Manager",
+        "type": "select",
+        "options": ["Manager 1", "Manager 2", "Manager 3"]
+      },
+      {
+        "name": "ContactDetails",
+        "label": "Contact Details",
+        "type": "text"
+      },
+      {
+        "name": "EmailID",
+        "label": "Email ID",
+        "type": "email"
+      },
+      {
+        "name": "GSTIN",
+        "label": "GSTIN No.",
+        "type": "text"
+      },
+      {
+        "name": "Country",
+        "label": "Country",
+        "type": "select",
+        "options": ["India", "USA", "UK", "Canada"],
+        "required": true,
+        "validationMessage": "Country is required"
+      },
+      {
+        "name": "State",
+        "label": "State",
+        "type": "select",
+        "options": ["Maharashtra", "California", "Texas", "New York"],
+        "required": true,
+        "validationMessage": "State is required"
+      },
+      {
+        "name": "ProjectAddress",
+        "label": "Project Address",
+        "type": "textarea",
+        "required": true,
+        "validationMessage": "Project Address is required"
+      },
+      {
+        "name": "Location",
+        "label": "Location",
+        "type": "select",
+        "options": ["Location 1", "Location 2", "Location 3"],
+        "required": true,
+        "validationMessage": "Location is required"
+      },
+      {
+        "name": "City",
+        "label": "City",
+        "type": "text"
+      },
+      {
+        "name": "Pincode",
+        "label": "Pincode",
+        "type": "number"
+      },
+      {
+        "name": "FinancialEffectGRN",
+        "label": "Financial Effect From GRN",
+        "type": "select",
+        "options": ["Yes", "No"]
+      },
+      {
+        "name": "FinancialEffectGIN",
+        "label": "Financial Effect From GIN",
+        "type": "select",
+        "options": ["Yes", "No"]
+      },
+      {
+        "name": "SummaryPostingBills",
+        "label": "Summary Posting from Bills",
+        "type": "select",
+        "options": ["Yes", "No"],
+        "required": true,
+        "validationMessage": "This field is required"
+      },
+      {
+        "name": "Status",
+        "label": "Status",
+        "type": "text",
+        "default": "Auto"
+      },
+      {
+        "name": "FileUpload",
+        "label": "Upload File",
+        "type": "file",
+        "required": false
+      },
+      {
+        "name": "Remarks",
+        "label": "Remarks",
+        "type": "textarea"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Save",
+        "type": "submit",
+        "label": "Save",
+        "className": ""
+      },
+      {
+        "name": "Search",
+        "type": "button",
+        "label": "Search",
+        "className": ""
+      },
+      {
+        "name": "Print",
+        "type": "button",
+        "label": "Print(1)",
+        "className": ""
+      }
+    ],
+    "search": {
+      "enabled": true,
+      "placeholder": "Search by Project Name",
+      "field": "ProjectName"
+    },
+    "table": {
+      "columns": [
+        { "name": "Sr", "selector": "id", "sortable": true },
+        {
+          "name": "Name of Company",
+          "selector": "CompanyName",
+          "sortable": true
+        },
+        { "name": "Project Name", "selector": "ProjectName", "sortable": true },
+        { "name": "Project Code", "selector": "ProjectCode", "sortable": true },
+        {
+          "name": "Project Start Date",
+          "selector": "ProjectStartDate",
+          "sortable": true
+        },
+        {
+          "name": "Financial Effect From GRN",
+          "selector": "FinancialEffectGRN",
+          "sortable": true
+        },
+        {
+          "name": "Financial Effect From GIN",
+          "selector": "FinancialEffectGIN",
+          "sortable": true
+        },
+        {
+          "name": "Summary Posting from Bills",
+          "selector": "SummaryPostingBills",
+          "sortable": true
+        },
+        { "name": "Status", "selector": "Status", "sortable": true }
+      ],
+      "data": [
+        {
+          "id": 1,
+          "CompanyName": "HoABL PVT LTD",
+          "ProjectName": "HoABL Test Project",
+          "ProjectCode": "HOTP",
+          "ProjectStartDate": "01/11/2024",
+          "FinancialEffectGRN": "Yes",
+          "FinancialEffectGIN": "Yes",
+          "SummaryPostingBills": "Yes",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 2,
+          "CompanyName": "Pritam Test",
+          "ProjectName": "Pritam Test Heights",
+          "ProjectCode": "PTH",
+          "ProjectStartDate": "01/09/2023",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 3,
+          "CompanyName": "Prathmesh test",
+          "ProjectName": "PK Heights",
+          "ProjectCode": "PKH",
+          "ProjectStartDate": "01/06/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 4,
+          "CompanyName": "New Company",
+          "ProjectName": "Ocean Heights",
+          "ProjectCode": "OH01",
+          "ProjectStartDate": "10/08/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 5,
+          "CompanyName": "noble construction company",
+          "ProjectName": "Nandakumar Block",
+          "ProjectCode": "NB01",
+          "ProjectStartDate": "01/06/2024",
+          "FinancialEffectGRN": "Yes",
+          "FinancialEffectGIN": "Yes",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 6,
+          "CompanyName": "Rahul P Pvt Ltd",
+          "ProjectName": "Rahul Heights",
+          "ProjectCode": "RH66",
+          "ProjectStartDate": "04/06/2024",
+          "FinancialEffectGRN": "Yes",
+          "FinancialEffectGIN": "Yes",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 7,
+          "CompanyName": "noble construction company",
+          "ProjectName": "NICMAR UNIVERSITY",
+          "ProjectCode": "NU",
+          "ProjectStartDate": "05/04/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 8,
+          "CompanyName": "Nikhil Construction",
+          "ProjectName": "Test",
+          "ProjectCode": "TE11",
+          "ProjectStartDate": "15/04/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 9,
+          "CompanyName": "noble construction company",
+          "ProjectName": "noble niwas",
+          "ProjectCode": "NN",
+          "ProjectStartDate": "01/03/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 10,
+          "CompanyName": "Test Company Pvt. Ltd.",
+          "ProjectName": "Test99",
+          "ProjectCode": "TP99",
+          "ProjectStartDate": "01/03/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 11,
+          "CompanyName": "Test Company Pvt. Ltd.",
+          "ProjectName": "ARV Group",
+          "ProjectCode": "ARVG",
+          "ProjectStartDate": "09/02/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 12,
+          "CompanyName": "Test Company Pvt. Ltd.",
+          "ProjectName": "AN Heights",
+          "ProjectCode": "AN01",
+          "ProjectStartDate": "08/02/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 13,
+          "CompanyName": "Test Company Pvt. Ltd.",
+          "ProjectName": "AR Heights",
+          "ProjectCode": "AR",
+          "ProjectStartDate": "08/02/2024",
+          "FinancialEffectGRN": "Yes",
+          "FinancialEffectGIN": "Yes",
+          "SummaryPostingBills": "Yes",
+          "Status": "Draft"
+        },
+        {
+          "id": 14,
+          "CompanyName": "Nikhil Construction",
+          "ProjectName": "Amar Business Park",
+          "ProjectCode": "ABP1",
+          "ProjectStartDate": "07/02/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        },
+        {
+          "id": 15,
+          "CompanyName": "Test Company Pvt. Ltd.",
+          "ProjectName": "Buildcon",
+          "ProjectCode": "BO1",
+          "ProjectStartDate": "06/02/2024",
+          "FinancialEffectGRN": "No",
+          "FinancialEffectGIN": "No",
+          "SummaryPostingBills": "No",
+          "Status": "Unlocked"
+        }
+      ]
+    }
+  },
+  "legal-entity-master": {
+    "handle": "legal-entity-master",
+    "title": "Legal Entity Master",
+    "api": {
+      "url": "/api/legal-entity/save",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    "fields": [
+      {
+        "name": "LegalEntityName",
+        "label": "Legal Entity Name",
+        "type": "text",
+        "required": true,
+        "validationMessage": "Legal Entity Name is required"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Save",
+        "type": "submit",
+        "label": "Save",
+        "className": ""
+      },
+      {
+        "name": "Search",
+        "type": "button",
+        "label": "Search",
+        "className": ""
+      },
+      {
+        "name": "Print",
+        "type": "button",
+        "label": "Print(1)",
+        "className": ""
+      }
+    ],
+    "search": {
+      "enabled": true,
+      "placeholder": "Search by Legal Entity Name",
+      "field": "LegalEntityName"
+    },
+    "table": {
+      "columns": [
+        { "name": "Sr", "selector": "id", "sortable": true },
+        {
+          "name": "Legal Entity Name",
+          "selector": "LegalEntityName",
+          "sortable": true
+        }
+      ],
+      "data": [
+        {
+          "id": 1,
+          "LegalEntityName": "HoABL PVT LTD"
+        },
+        {
+          "id": 2,
+          "LegalEntityName": "Pritam Test"
+        },
+        {
+          "id": 3,
+          "LegalEntityName": "Prathmesh test"
+        },
+        {
+          "id": 4,
+          "LegalEntityName": "New Company"
+        },
+        {
+          "id": 5,
+          "LegalEntityName": "noble construction company"
+        },
+        {
+          "id": 6,
+          "LegalEntityName": "Rahul P Pvt Ltd"
+        },
+        {
+          "id": 7,
+          "LegalEntityName": "noble construction company"
+        },
+        {
+          "id": 8,
+          "LegalEntityName": "Nikhil Construction"
+        },
+        {
+          "id": 9,
+          "LegalEntityName": "noble construction company"
+        },
+        {
+          "id": 10,
+          "LegalEntityName": "Test Company Pvt. Ltd."
+        },
+        {
+          "id": 11,
+          "LegalEntityName": "Test Company Pvt. Ltd."
+        },
+        {
+          "id": 12,
+          "LegalEntityName": "Test Company Pvt. Ltd."
+        },
+        {
+          "id": 13,
+          "LegalEntityName": "Test Company Pvt. Ltd."
+        },
+        {
+          "id": 14,
+          "LegalEntityName": "Nikhil Construction"
+        },
+        {
+          "id": 15,
+          "LegalEntityName": "Test Company Pvt. Ltd."
+        }
+      ]
+    }
+  }
+}
