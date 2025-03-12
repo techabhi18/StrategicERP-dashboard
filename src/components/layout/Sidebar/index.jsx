@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom';
 
 const menus = [
-    { icon: "../../../../public/Sidebar/home_icon.svg", path: "/", active: true },
-    { name: "Admin", icon: "../../../../public/Sidebar/ERP-Admin.svg", path: "/erp-admin", active: false },
-    { name: "Process", icon: "../../../../public/Sidebar/Process-Management.svg", path: "/process-management", active: false },
-    { name: "Land", icon: "../../../../public/Sidebar/Land-Management.svg", path: "/land-management", active: false },
-    { name: "SRA", icon: "../../../../public/Sidebar/SRA-Management.svg", path: "/sra-management", active: false },
-    { name: "Redevelop", icon: "../../../../public/Sidebar/Redevelopment-Management.svg", path: "/redevelopment-management", active: false },
-    { name: "Legal", icon: "../../../../public/Sidebar/Legal-Management.svg", path: "/legal-management", active: false },
-    { name: "Liaison", icon: "../../../../public/Sidebar/Liaison-Management.svg", path: "/liaison-management", active: false },
-    { name: "Projects", icon: "../../../../public/Sidebar/Project-Engineering.svg", path: "/project-management", active: false },
-    { name: "Sites", icon: "../../../../public/Sidebar/Sites-Management.svg", path: "/sites-management", active: false },
-    { name: "Contractors", icon: "../../../../public/Sidebar/Contractors-Management.svg", path: "/contractors-management", active: false }
+    { icon: "/Sidebar/home_icon.svg", path: "/", active: true },
+    { name: "Admin", icon: "/Sidebar/ERP-Admin.svg", path: "/erp-admin", active: false },
+    { name: "Process", icon: "/Sidebar/Process-Management.svg", path: "/process-management", active: false },
+    { name: "Land", icon: "/Sidebar/Land-Management.svg", path: "/land-management", active: false },
+    { name: "SRA", icon: "/Sidebar/SRA-Management.svg", path: "/sra-management", active: false },
+    { name: "Redevelop", icon: "/Sidebar/Redevelopment-Management.svg", path: "/redevelopment-management", active: false },
+    { name: "Legal", icon: "/Sidebar/Legal-Management.svg", path: "/legal-management", active: false },
+    { name: "Liaison", icon: "/Sidebar/Liaison-Management.svg", path: "/liaison-management", active: false },
+    { name: "Projects", icon: "/Sidebar/Project-Engineering.svg", path: "/project-management", active: false },
+    { name: "Sites", icon: "/Sidebar/Sites-Management.svg", path: "/sites-management", active: false },
+    { name: "Contractors", icon: "/Sidebar/Contractors-Management.svg", path: "/contractors-management", active: false }
 ];
 
 const Sidebar = () => {
