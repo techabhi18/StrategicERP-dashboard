@@ -21,6 +21,7 @@ const Page = () => {
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const safeFormatMessage = ({ id, defaultMessage }) => {
         try {
@@ -31,18 +32,30 @@ const Page = () => {
     };
 
     useEffect(() => {
+        setLoading(true);
         if (formConfig[formType]) {
             setFormDetails(formConfig[formType]);
             setFilteredData(formConfig[formType].table?.data || []);
+        } else {
+            setFormDetails(null);
         }
+        setLoading(false);
     }, [formType, locale]);
 
-    if (!formDetails)
+    if (loading)
         return (
             <div>
                 {safeFormatMessage({ id: "loading", defaultMessage: "Loading..." })}
             </div>
         );
+
+    if (!formDetails) {
+        return (
+            <div>
+                {safeFormatMessage({ id: "No Form Found", defaultMessage: "No Form Found" })}
+            </div>
+        );
+    }
 
     const { fields, api, table, search } = formDetails;
 
@@ -256,7 +269,7 @@ const Page = () => {
                                         name="search"
                                         value={searchTerm}
                                         onChange={handleSearch}
-                                        className="shadow-inner bg-[#f9fafe] px-2 py-1 rounded-md text-sm w-1/4"
+                                        className="bg-[#f9fafe] border border-[#BDC2D0] px-2 py-1 outline-none rounded-md text-sm w-1/4"
                                         placeholder={safeFormatMessage({
                                             id: search.placeholder,
                                             defaultMessage: search.placeholder,

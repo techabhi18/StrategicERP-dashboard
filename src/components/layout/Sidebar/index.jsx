@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom';
 
 const menus = [
@@ -52,27 +52,30 @@ const Sidebar = () => {
                 >
                     <div className='flex flex-col gap-2'>
                         <p className='font-semibold bg-[#eceffb] px-4 py-5'>{hoveredMenu}</p>
-                        <div className='p-2'>
-                            <div className='border-b border-solid border-gray-400 pb-1 font-bold text-[16px] text-[#162d58]'>Statutory Setup</div>
-                            <div onClick={() => setHoveredMenu(null)}>
-                                <NavLink to='/erp-admin/company-master' className='sidebar-menu-item'>Company Master</NavLink>
-                            </div>
-                        </div>
-                        <div className='p-2'>
-                            <div className='border-b border-solid border-gray-400 pb-1 font-bold text-[16px] text-[#162d58]'>Finance Setup</div>
-                            <div onClick={() => setHoveredMenu(null)}>
-                                <NavLink to='/erp-admin/legal-entity-master' className='sidebar-menu-item'>Legal Entity Master</NavLink>
-                            </div>
-                            <div onClick={() => setHoveredMenu(null)}>
-                                <NavLink to='/erp-admin/project-master' className='sidebar-menu-item'>Project Master</NavLink>
-                            </div>
-                            <div onClick={() => setHoveredMenu(null)}>
-                                <NavLink to='/erp-admin/sub-project-master' className='sidebar-menu-item'>Sub Project Master</NavLink>
-                            </div>
-                            <div onClick={() => setHoveredMenu(null)}>
-                                <NavLink to='/erp-admin/item-group-master' className='sidebar-menu-item'>Item Group Master</NavLink>
-                            </div>
-                        </div>
+                        {hoveredMenu == "Admin" ?
+                            <Fragment>
+                                <div className='p-2'>
+                                    <div className='border-b border-solid border-gray-400 pb-1 font-bold text-[16px] text-[#162d58]'>Statutory Setup</div>
+                                    <div onClick={() => setHoveredMenu(null)}>
+                                        <NavLink to='/erp-admin/company-master' className='sidebar-menu-item'>Company Master</NavLink>
+                                    </div>
+                                </div>
+                                <div className='p-2'>
+                                    <div className='border-b border-solid border-gray-400 pb-1 font-bold text-[16px] text-[#162d58]'>Finance Setup</div>
+                                    <div onClick={() => setHoveredMenu(null)}>
+                                        <NavLink to='/erp-admin/legal-entity-master' className='sidebar-menu-item'>Legal Entity Master</NavLink>
+                                    </div>
+                                    <div onClick={() => setHoveredMenu(null)}>
+                                        <NavLink to='/erp-admin/project-master' className='sidebar-menu-item'>Project Master</NavLink>
+                                    </div>
+                                    <div onClick={() => setHoveredMenu(null)}>
+                                        <NavLink to='/erp-admin/sub-project-master' className='sidebar-menu-item'>Sub Project Master</NavLink>
+                                    </div>
+                                    <div onClick={() => setHoveredMenu(null)}>
+                                        <NavLink to='/erp-admin/item-group-master' className='sidebar-menu-item'>Item Group Master</NavLink>
+                                    </div>
+                                </div>
+                            </Fragment> : null}
                     </div>
                 </div>
             )}

@@ -11,8 +11,8 @@ const moduleComponents = {
 };
 
 const tabs = [
-    { key: "workflow", label: "Workflow", props: { img: "/modules/erpadmin.jpg" } },
-    { key: "dashboard", label: "Dashboard", props: { img: "/modules/cooluser.png" } },
+    { key: "workflow", label: "Workflow", props: { img: "/Modules/erpadmin.jpg" } },
+    { key: "dashboard", label: "Dashboard", props: { img: "/Modules/cooluser.png" } },
     { key: "self-training", label: "Self Training", props: { videos: [{ id: 1, title: "Training Video", thumbnail: "/images/video.png" }] } },
 ];
 
