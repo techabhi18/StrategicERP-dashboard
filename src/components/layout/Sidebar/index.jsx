@@ -21,7 +21,7 @@ const Sidebar = () => {
 
     return (
         <div
-            className='relative flex'
+            className='relative flex h-screen'
             onMouseLeave={() => setHoveredMenu(null)}
         >
             <div className='border-b border-solid border-[#3c68dd] bg-[#3c68dd] text-white'>
