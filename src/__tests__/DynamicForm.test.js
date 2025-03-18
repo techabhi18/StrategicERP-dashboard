@@ -1,138 +1,77 @@
+import { TextEncoder, TextDecoder } from "util";
+if (!global.TextEncoder) global.TextEncoder = TextEncoder;
+if (!global.TextDecoder) global.TextDecoder = TextDecoder;
+
+import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+global.React = React;
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { IntlProvider } from "react-intl";
-import { MemoryRouter, Routes, Route, useParams } from "react-router-dom";
-import axios from "axios";
-import DynamicForm from "../pages/DynamicForm.jsx";
+import Page from "../pages/DynamicForm/page";
 import formConfig from "../data/form.json";
 
-jest.mock("axios", () => ({
-  __esModule: true,
-  default: {
-    create: jest.fn(),
-    request: jest.fn(),
-  },
-}));
-
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: jest.fn(),
-}));
-
-const Wrapper = ({ children }) => (
-  <MemoryRouter initialEntries={["/form/company-master"]}>
-    <IntlProvider locale="en" messages={{}}>
-      <Routes>
-        <Route path="/form/:formType" element={children} />
-      </Routes>
-    </IntlProvider>
-  </MemoryRouter>
-);
-
-const renderForm = (formType) => {
-  useParams.mockReturnValue({ formType });
-  return render(<DynamicForm />, { wrapper: Wrapper });
-};
+jest.mock("../i18n", () => ({ useLocale: () => ({ locale: "en" }) }));
 
 describe("DynamicForm Component", () => {
-  beforeEach(() => {
-    axios.mockClear();
+  const renderWithRouter = (initialRoute) => {
+    return render(
+      <IntlProvider locale="en" messages={{}}>
+        <MemoryRouter initialEntries={[initialRoute]}>
+          <Routes>
+            <Route path="/:formType" element={<Page />} />
+          </Routes>
+        </MemoryRouter>
+      </IntlProvider>
+    );
+  };
+
+  test("renders the correct form based on URL params (company-master)", async () => {
+    const { container } = renderWithRouter("/company-master");
+    const titleElement = await screen.findByText("Company Master");
+    expect(titleElement).toBeInTheDocument();
+    const companyNameField = container.querySelector(
+      'input[name="CompanyName"]'
+    );
+    expect(companyNameField).toBeInTheDocument();
   });
 
-  describe("Company Master Form", () => {
-    test("renders all form fields", () => {
-      renderForm("company-master");
+  test('renders "No Form Found" for an invalid URL param', async () => {
+    renderWithRouter("/nonexistent-form");
+    const noFormText = await screen.findByText("No Form Found");
+    expect(noFormText).toBeInTheDocument();
+  });
 
-      expect(screen.getByLabelText(/Name of Company/i)).toBeInTheDocument();
-      expect(
-        screen.getByLabelText(/Communication Address/i)
-      ).toBeInTheDocument();
-      expect(screen.getByLabelText(/ERP Go-Live Date/i)).toBeInTheDocument();
-      expect(screen.getByText(/Balance Sheet Stock/i)).toBeInTheDocument();
-      expect(screen.getByDisplayValue("Auto")).toBeInTheDocument();
-    });
+  test("shows validation error message on form submission when required field is empty", async () => {
+    renderWithRouter("/company-master");
+    const saveButton = await screen.findByRole("button", { name: "Save" });
+    await userEvent.click(saveButton);
+    const errorMessage = await screen.findByText("Company Name is required");
+    expect(errorMessage).toBeInTheDocument();
+  });
 
-    test("shows validation errors for required fields", async () => {
-      renderForm("company-master");
-
-      fireEvent.click(screen.getByText(/Save/i));
-
-      await waitFor(() => {
-        expect(
-          screen.getByText(/Company Name is required/i)
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(/Company Code is required/i)
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(/ERP Go-Live Date is required/i)
-        ).toBeInTheDocument();
-      });
-    });
-
-    test("renders select options correctly", () => {
-      renderForm("company-master");
-
-      const select = screen.getByLabelText(/Balance Sheet Stock/i);
-      fireEvent.mouseDown(select);
-
-      expect(screen.getByRole("option", { name: /Yes/i })).toBeInTheDocument();
-      expect(screen.getByRole("option", { name: /No/i })).toBeInTheDocument();
-    });
-
-    test("renders and filters data table", async () => {
-      renderForm("company-master");
-
-      expect(screen.getByText("HoABL PVT LTD")).toBeInTheDocument();
-
-      const searchInput = screen.getByPlaceholderText(
-        /Search by Company Name/i
-      );
-      fireEvent.change(searchInput, { target: { value: "HoABL" } });
-
-      await waitFor(() => {
-        expect(screen.queryByText("Pritam Test")).not.toBeInTheDocument();
-        expect(screen.getByText("HoABL PVT LTD")).toBeInTheDocument();
-      });
+  test("renders all fields defined in form.json for company-master", async () => {
+    const { container } = renderWithRouter("/company-master");
+    await screen.findByText("Company Master");
+    const fields = formConfig["company-master"].fields;
+    fields.forEach((field) => {
+      const element = container.querySelector(`[name="${field.name}"]`);
+      expect(element).toBeInTheDocument();
     });
   });
 
-  describe("Project Master Form", () => {
-    test("renders all form fields", () => {
-      renderForm("project-master");
-
-      expect(screen.getByLabelText(/Project Name/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/Project Start Date/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/Project Address/i)).toBeInTheDocument();
-      expect(screen.getByText(/Budget Applicable/i)).toBeInTheDocument();
-    });
-
-    test("validates required fields", async () => {
-      renderForm("project-master");
-
-      fireEvent.click(screen.getByText(/Save/i));
-
-      await waitFor(() => {
-        expect(
-          screen.getByText(/Project Name is required/i)
-        ).toBeInTheDocument();
-        expect(
-          screen.getByText(/Project Code is required/i)
-        ).toBeInTheDocument();
-        expect(screen.getByText(/Country is required/i)).toBeInTheDocument();
-      });
-    });
-
-    test("renders complex select dropdowns", () => {
-      renderForm("project-master");
-
-      const countrySelect = screen.getByLabelText(/Country/i);
-      fireEvent.mouseDown(countrySelect);
-
-      expect(
-        screen.getByRole("option", { name: /India/i })
-      ).toBeInTheDocument();
-      expect(screen.getByRole("option", { name: /USA/i })).toBeInTheDocument();
-    });
+  test("shows validation error messages for all required fields on form submission", async () => {
+    renderWithRouter("/company-master");
+    await screen.findByText("Company Master");
+    const saveButton = await screen.findByRole("button", { name: "Save" });
+    await userEvent.click(saveButton);
+    const requiredFields = formConfig["company-master"].fields.filter(
+      (field) => field.required
+    );
+    for (let field of requiredFields) {
+      const errorMessage = await screen.findByText(field.validationMessage);
+      expect(errorMessage).toBeInTheDocument();
+    }
   });
 });

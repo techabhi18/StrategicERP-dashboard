@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test": "jest",
     "load-test": "k6 run load-test.js"
   },
   "jest": {
@@ -24,6 +24,9 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!(react-intl|react-data-table-component|@testing-library)/)"
+    ],
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
     ]
   },
   "dependencies": {
