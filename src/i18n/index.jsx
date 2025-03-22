@@ -2,10 +2,12 @@ import React, { createContext, useContext, useState } from "react";
 import { IntlProvider } from "react-intl";
 import enMessages from "../locales/en.json";
 import hiMessages from "../locales/hi.json";
+import spMessages from "../locales/sp.json";
 
 const messages = {
   en: enMessages,
   hi: hiMessages,
+  sp: spMessages,
 };
 
 const LocaleContext = createContext();

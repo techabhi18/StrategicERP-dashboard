@@ -13,6 +13,7 @@ import ProfileIcon from "../../icons/ProfileIcon";
 import EFilesIcon from "../../icons/E-FilesIcon";
 import SharedFilesIcon from "../../icons/SharedFilesIcon";
 import ChanakyaAiIcon from "../../icons/ChanakyaAIIcon";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 const subMenus = [
     { name: "Dashboard", link: "/", Icon: DashboardIcon },
@@ -31,7 +32,7 @@ const MenuIcon = ({ IconComponent, isActive }) => {
 
 const MenuItem = ({ name, link, IconComponent, isActive, onClick }) => {
     return (
-        <div className={`whitespace-nowrap px-3 py-2 text-sm inline-block ${isActive ? "bg-[#f5f6fb] text-[#183EC2] border-b-[3px] border-solid border-[#183EC2]" : "text-[#808080]"}`}>
+        <div className={`whitespace-nowrap px-3 py-2 text-sm inline-block ${isActive ? "bg-container text-primaryText border-b-[3px] border-solid border-divider" : "text-primaryText"}`}>
             <NavLink to={link} onClick={onClick} className={`submenu-text flex gap-1.5 items-center`}>
                 <MenuIcon IconComponent={IconComponent} isActive={isActive} />
                 {name}
@@ -52,7 +53,7 @@ const Header = () => {
 
     return (
         <div className="sticky top-0 z-99 shadow-sm">
-            <div className="bg-[#f6f8fc] py-2 px-4 flex items-center justify-between gap-4 h-[62px]">
+            <div className="bg-container py-2 px-4 flex items-center justify-between gap-4 h-[62px]">
                 <div className="flex items-center gap-4">
                     <NavLink to="/">
                         <img src="/Header/StrategicERP.svg" alt="StrategicERP" className="w-full max-w-32" />
@@ -61,7 +62,7 @@ const Header = () => {
 
                 <div>
                     <label htmlFor="search"></label>
-                    <input type="search" name="search" id="search" placeholder="Search..." className="rounded-lg py-1 px-2 border border-solid border-[#c8d2e6] text-sm min-w-72 w-full outline-none" />
+                    <input type="search" name="search" id="search" placeholder="Search..." className="rounded-lg py-1 px-2 border border-solid border-divider text-sm min-w-72 w-full outline-none" />
                 </div>
 
                 <div className="md:flex hidden items-center gap-2.5">
@@ -70,15 +71,18 @@ const Header = () => {
                     <Icon src="/Header/Video_Icon.svg" alt="Video" />
                     <Icon src="/Header/Maximum_Icon.svg" alt="Full Screen" />
 
-                    <select className="bg-white border border-solid border-[#c8d2e6] text-primary p-[3px] rounded text-sm" value={locale} onChange={(e) => switchLanguage(e.target.value)}>
+                    <select className="bg-app-bg border border-solid border-divider text-primary p-[3px] rounded text-sm" value={locale} onChange={(e) => switchLanguage(e.target.value)}>
                         <option value="en">English</option>
                         <option value="hi">हिन्दी</option>
+                        <option value="sp">Spanish</option>
                     </select>
 
-                    <div className="flex items-center gap-2 bg-white border border-solid border-[#c8d2e6] rounded-md p-1">
+                    <div className="flex items-center gap-2 bg-app-bg border border-solid border-divider rounded-md p-1">
                         <img src="/Header/StrategicERP_Version.gif" alt="StrategicERP Version" className="w-[52px]" />
                     </div>
-                    <IoMenuOutline className="text-3xl bg-white border border-solid border-[#c8d2e6] rounded-md p-0.5 text-[#2144B4]" />
+                    <IoMenuOutline className="text-3xl bg-white border border-solid border-divider rounded-md p-0.5 text-primary" />
+
+                    <ThemeSwitcher />
                 </div>
             </div>
 
@@ -94,7 +98,7 @@ const Header = () => {
                             onClick={() => setActiveMenu(link)}
                         />
                     ))}
-                    <p className="text-sm text-right block ml-auto">Good Evening!!! ERP Admin</p>
+                    <p className="text-sm text-right block ml-auto text-primaryText">Good Evening!!! ERP Admin</p>
                 </div>
                 : null}
         </div>

@@ -83,6 +83,8 @@ const Page = () => {
     );
 
     const handleSubmit = async (values, { setSubmitting }) => {
+        console.log(values);
+
         try {
             const response = await axios({
                 method: api.method,
@@ -90,7 +92,8 @@ const Page = () => {
                 headers: api.headers,
                 data: values,
             });
-            console.log("API Response:", response.data);
+            console.log("API Response:", response);
+            console.log("API Response Data:", response?.data);
         } catch (error) {
             console.error("API Error:", error);
         } finally {
@@ -109,17 +112,17 @@ const Page = () => {
     };
 
     return (
-        <div className="bg-gray-100 overflow-auto h-[87vh] hide-scrollbar">
+        <div className="bg-container overflow-auto h-[87vh] hide-scrollbar">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ isSubmitting }) => (
+                {({ values, handleChange, handleBlur, isSubmitting }) => (
                     <Form>
                         <div>
                             <div className="bg-white text-[#76839a] py-2 px-3 text-sm font-semibold">
-                                <NavLink to="/" className="cursor-pointer px-1 hover:text-[#2962cb]">Home</NavLink> / <NavLink to="/erp-admin" className="cursor-pointer px-1 hover:text-[#2962cb]">Admin</NavLink> / <span className="px-1 text-[#2962cb] cursor-pointer">{formDetails.title}</span>
+                                <NavLink to="/" className="cursor-pointer px-1 hover:text-[#2962cb]">Home</NavLink> / <NavLink to="/erp-admin" className="cursor-pointer px-1 hover:text-primaryText">Admin</NavLink> / <span className="px-1 text-primaryText cursor-pointer">{formDetails.title}</span>
                             </div>
                             <div className="bg-white grid md:grid-cols-3 grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-7 p-4 rounded-lg m-4">
                                 {fields.map((field) => (
@@ -134,12 +137,15 @@ const Page = () => {
                                                 component={CustomTextarea}
                                                 rows="3"
                                                 required={field.required}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values[field.name]}
                                             />
                                         ) : field.type === "select" ? (
                                             <div className="w-full">
                                                 <label
                                                     htmlFor={field.name}
-                                                    className="text-sm w-full text-black mb-1"
+                                                    className="text-sm w-full text-primaryText mb-1"
                                                 >
                                                     {safeFormatMessage({
                                                         id: field.label,
@@ -150,7 +156,10 @@ const Page = () => {
                                                     name={field.name}
                                                     as="select"
                                                     id={field.name}
-                                                    className="w-full bg-[#f9fafe] border border-[#BDC2D0] rounded-md focus:outline-none px-2 py-1 text-sm ml-1"
+                                                    onChange={handleChange}
+                                                    value={values[field.name]}
+                                                    onBlur={handleBlur}
+                                                    className="w-full bg-container border border-[#BDC2D0] rounded-md focus:outline-none px-2 py-1 text-sm ml-1"
                                                 >
                                                     <option value="">
                                                         {safeFormatMessage({
@@ -176,6 +185,9 @@ const Page = () => {
                                             <Field
                                                 type={field.type}
                                                 name={field.name}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values[field.name]}
                                                 label={safeFormatMessage({
                                                     id: field.label,
                                                     defaultMessage: field.label,
@@ -193,7 +205,7 @@ const Page = () => {
                                     <button
                                         key={action.name}
                                         type={action.type === "submit" ? "submit" : "button"}
-                                        className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-[#2962cb] text-[#2962cb] bg-white  py-1 px-5 shadow-sm ${action.className}`}
+                                        className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-primary text-primary bg-white  py-1 px-5 shadow-sm ${action.className}`}
                                         disabled={isSubmitting}
                                     >
                                         {isSubmitting && action.type === "submit"
@@ -209,21 +221,21 @@ const Page = () => {
                                 ))}
                                 <div className="flex gap-2 items-center" onMouseLeave={() => setTooltipVisible(false)}>
                                     <p className="text-sm text-black">Rows:</p>
-                                    <input type="number" className="w-1/4 outline-none border border-[#BDC2D0] rounded-md px-2 py-1 text-sm" value={10} />
+                                    <input type="number" className="w-1/4 outline-none border border-primary rounded-md px-2 py-1 text-sm" value={10} />
                                     <div className="relative">
                                         <BsThreeDotsVertical
-                                            className="text-[#2962cb] text-2xl cursor-pointer"
+                                            className="text-primary text-2xl cursor-pointer"
                                             onClick={() => setTooltipVisible(!tooltipVisible)}
                                             onMouseEnter={() => setTooltipVisible(true)} />
                                         {tooltipVisible && (
                                             <div
-                                                className="absolute left-2.5 bottom-7 bg-white border border-gray-300 shadow-lg rounded-lg text-sm flex gap-2 p-2"
+                                                className="absolute left-2.5 bottom-7 bg-white border border-primary shadow-lg rounded-lg text-sm flex gap-2 p-2"
                                                 onMouseEnter={() => setTooltipVisible(true)}
                                                 onMouseLeave={() => setTooltipVisible(false)}
                                             >
                                                 <button
                                                     type="button"
-                                                    className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-[#2962cb] text-[#2962cb] bg-white py-1 px-5 shadow-sm`}
+                                                    className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-primary text-primary bg-white py-1 px-5 shadow-sm`}
                                                 >
                                                     {safeFormatMessage({
                                                         id: "export",
@@ -232,7 +244,7 @@ const Page = () => {
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-[#2962cb] text-[#2962cb] bg-white py-1 px-5 shadow-sm`}
+                                                    className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-primary text-primary bg-white py-1 px-5 shadow-sm`}
                                                 >
                                                     {safeFormatMessage({
                                                         id: "import",
@@ -241,7 +253,7 @@ const Page = () => {
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-[#2962cb] text-[#2962cb] bg-white py-1 px-5 shadow-sm`}
+                                                    className={`btn-hover cursor-pointer w-fit rounded-md text-sm font-semibold border border-primary text-primary bg-white py-1 px-5 shadow-sm`}
                                                 >
                                                     {safeFormatMessage({
                                                         id: "clear",
@@ -269,7 +281,7 @@ const Page = () => {
                                         name="search"
                                         value={searchTerm}
                                         onChange={handleSearch}
-                                        className="bg-[#f9fafe] border border-[#BDC2D0] px-2 py-1 outline-none rounded-md text-sm w-1/4"
+                                        className="bg-[#f9fafe] border border-primary px-2 py-1 outline-none rounded-md text-sm w-1/4"
                                         placeholder={safeFormatMessage({
                                             id: search.placeholder,
                                             defaultMessage: search.placeholder,

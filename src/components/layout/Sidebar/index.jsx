@@ -24,7 +24,7 @@ const Sidebar = () => {
             className='relative flex h-screen'
             onMouseLeave={() => setHoveredMenu(null)}
         >
-            <div className='border-b border-solid border-[#3c68dd] bg-[#3c68dd] text-white'>
+            <div className='border-b border-solid border-primary bg-primary text-white'>
                 {menus?.map((menu, i) => {
                     const isActive =
                         menu.path === "/" ? location.pathname === "/"
@@ -34,8 +34,8 @@ const Sidebar = () => {
                         <NavLink
                             key={i}
                             to={menu?.path}
-                            className={`cursor-pointer bg-[#183ec1] border-b-2 border-solid border-[#3c68dd] py-1.5 px-3 flex flex-col text-center items-center justify-center w-full 
-                            ${isActive ? 'bg-[#3c68dd]' : ''} ${menu?.path === '/' ? 'h-[62px] sticky top-0' : ''}`}
+                            className={`cursor-pointer bg-primary border-b-2 border-solid border-primaryActive py-1.5 px-3 flex flex-col text-center items-center justify-center w-full 
+                            ${isActive ? 'bg-primaryActive' : ''} ${menu?.path === '/' ? 'h-[62px] sticky top-0' : ''}`}
                             onMouseEnter={() => setHoveredMenu(menu.name)}
                         >
                             <img src={menu?.icon} alt={menu?.name} />
